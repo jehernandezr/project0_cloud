@@ -1,0 +1,16 @@
+@import "../../pages/Palette.scss";
+@import "../Style.scss";
+@import url("https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Round");
+
+body {
+  font-family: "Comfortaa";
+  background-color: $gunmetal !important;
+}
+
+.container-fluid {
+  position: absolute;
+  height: 100%;
+  color: $cultured;
+}
+

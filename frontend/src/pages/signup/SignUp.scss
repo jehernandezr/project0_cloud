@@ -1,0 +1,23 @@
+/* Backgrounds */
+@import "../../pages/Palette.scss";
+@import "../../pages/Style.scss";
+.main-bg {
+    height: 91vh;
+
+            @media screen and ( max-width: 411px )
+        {
+            height: 93.22vh;
+        }
+             @media screen and ( max-width: 376px )
+        {
+            height: 93.1vh;
+        }
+            @media screen and ( max-width: 361px )
+        {
+            height: 91.2vh;
+        }
+
+ 
+
+     background-color: $gunmetal;
+}

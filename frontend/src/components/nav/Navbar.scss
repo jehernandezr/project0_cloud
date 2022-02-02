@@ -1,0 +1,67 @@
+@import "../../pages/Palette.scss";
+@import "../../pages/Style.scss";
+
+.form-inline,
+.input-group {
+	padding: 0px !important;
+	
+
+	button {
+		margin-left: 1rem !important;
+	}
+}
+
+#mainNav {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+#basic-navbar-nav {
+	justify-content: space-between;
+}
+
+#langSelect {
+	padding: 0px;
+}
+
+.col-md-2.navbar-nav {
+	margin: 0 !important;
+	padding: 0;
+}
+
+.nav-link {
+	@media only screen and (min-width: 992px) {
+		padding: 0 0.3rem 0 0.3rem !important;
+		font-size: 0.9rem;
+		color: $orange-yellow-crayola !important;
+		margin-top: 0.3rem;
+		margin-bottom: 0.3rem;
+	}
+}
+
+#filterButton,
+#searchButton {
+	color: $orange-yellow-crayola;
+	border-color: $orange-yellow-crayola;
+	background-color: $charcoal;
+	margin-top: 0.3rem !important;
+	margin-bottom: 0.3rem !important;
+	&:hover {
+		background-color: $orange-yellow-crayola;
+		color: $gunmetal;
+	}
+}
+
+#searchnav {
+	padding: 0px;
+	justify-content: space-between;
+}
+
+#textType {
+	border: 0px;
+}
+
+.col {
+	margin-top: 0.3rem !important;
+	margin-bottom: 0.3rem !important;
+}

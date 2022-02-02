@@ -1,0 +1,28 @@
+@import "../../pages/Palette.scss";
+@import "../../pages/Style.scss";
+
+.card {
+	.card-body {
+		bottom: 0%;
+	}
+	.card-title,
+	.card-body,
+	.card-header,
+	{
+		text-align: center;
+		text-decoration: none;
+		color: $cultured;
+		:hover {
+			text-decoration: none;
+
+		}
+	}
+		.card-header {
+		font-size: x-large
+			
+			}
+	.card-body {
+		font-size: medium
+		}
+	background-color: $charcoal;
+}
