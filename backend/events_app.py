@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
 from flask_migrate import Migrate
@@ -9,6 +9,7 @@ from utils.marshmallow import ma
 from views import event_view, user_view
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
+from error_handler import CustomError
 
 
 
@@ -30,6 +31,12 @@ jwt = JWTManager(app)
 cors = CORS(app)
 
 api = Api(app)
+
+@app.errorhandler(CustomError)
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 
 api.add_resource(event_view.EventResourceList, '/api/v1/events')
 api.add_resource(event_view.EventResourceDetail, '/api/v1/events/<string:event_id>')
