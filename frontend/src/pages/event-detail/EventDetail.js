@@ -146,13 +146,13 @@ export const EventsDetail = () => {
 						</label>
 						<input
 							className="form-control form-in-signup"
-							type="text"
-							defaultValue={state.event.is_face_to_face}
+							type="checkbox"
+							defaultChecked={state.event.is_face_to_face ?? false}
 							required={true}
 							id="faceToFaceField"
 							name="is_face_to_face"
 							onChange={(e) => {
-								setState({event:{ ...state.event, is_face_to_face: !e.target.value} });
+								setState({event:{ ...state.event, is_face_to_face: !e.target.checked} });
 								return handleInputChange(e);
 							}}
 						/>
@@ -162,7 +162,7 @@ export const EventsDetail = () => {
 					<div className="form-group text-l">
 						<label
 							className="text-whitesmoke margin-r "
-							htmlFor="faceToFaceField"
+							htmlFor="startsAtField"
 						>
 							Event starts at:
 						</label>
@@ -171,10 +171,10 @@ export const EventsDetail = () => {
 							type="text"
 							defaultValue={state.event.starts_at}
 							required={true}
-							id="faceToFaceField"
-							name="is_face_to_face"
+							id="startsAtField"
+							name="starts_at"
 							onChange={(e) => {
-								setState({event:{ ...state.event, is_face_to_face: !e.target.value} });
+								setState({event:{ ...state.event, starts_at: !e.target.value} });
 								return handleInputChange(e);
 							}}
 						/>
@@ -184,19 +184,19 @@ export const EventsDetail = () => {
 					<div className="form-group text-l">
 						<label
 							className="text-whitesmoke margin-r "
-							htmlFor="faceToFaceField"
+							htmlFor="endsAtField"
 						>
-							Event is Online:
+							Event ends at:
 						</label>
 						<input
 							className="form-control form-in-signup"
 							type="text"
-							defaultValue={state.event.is_face_to_face}
+							defaultValue={state.event.ends_at}
 							required={true}
-							id="faceToFaceField"
-							name="is_face_to_face"
+							id="endsAtField"
+							name="ends_at"
 							onChange={(e) => {
-								setState({event:{ ...state.event, is_face_to_face: !e.target.value} });
+								setState({event:{ ...state.event, ends_at: !e.target.value} });
 								return handleInputChange(e);
 							}}
 						/>

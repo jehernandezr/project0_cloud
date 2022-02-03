@@ -44,7 +44,7 @@ class EventsModel(db.Model):
         return self.__starts_at
 
     @starts_at.setter    
-    def ends_at(self, value):   
+    def starts_at(self, value):   
         self.__starts_at = datetime.fromisoformat(value) if value else datetime.utcnow(),
     
     @starts_at.deleter    

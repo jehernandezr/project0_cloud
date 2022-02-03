@@ -207,6 +207,9 @@ export const  useDetailEventForm= (schema) => {
   };
 
   const handleInputChange = (event) => {
+    if (event.target.type === 'checkbox' && event.target.name === 'is_face_to_face')
+        event.target.value = !event.target.checked
+
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
 
