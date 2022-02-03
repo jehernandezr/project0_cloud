@@ -4,23 +4,19 @@ import { useParams } from "react-router";
 import useUser from "../../hooks/useUser";
 import "./EventDetail.scss";
 import { useDetailEventForm } from "../../hooks/customHooks";
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import DatePicker from 'react-modern-calendar-datepicker';
 
-export const EventsDetail = () => {
-
+export const EventsDetail = (props) => {
 
 	const { handleSubmit, handleInputChange } = useDetailEventForm();
 	const { jwt } = useUser();
+	
 	const [state, setState] = useState({ event: {} });
 
 
 	const { id } = useParams();
 
 	useEffect(() => {
-		console.log(id)
-
-		const url = `${API}/events/${id && id}`;
+		const url = `${API}/events/${id}`;
 			fetch(url, {
 				method: 'GET',
 				headers: {
@@ -37,6 +33,7 @@ export const EventsDetail = () => {
 	}, [id, jwt]);
 
 
+
 	/* rating synopsis title year countries*/
 	return (
 		<div className="container-fluid">
@@ -47,7 +44,6 @@ export const EventsDetail = () => {
 					}}
 				>
 			
-
 					<div className="form-group text-l">
 						<label
 							className="text-whitesmoke margin-r-llg"
@@ -59,18 +55,17 @@ export const EventsDetail = () => {
 						<input
 							className="form-control form-in-signup"
 							type="text"
-							defaultValue={state.event.name}
+							defaultValue={state?.event?.name}
 							id="nameField"
 							required={true}
 							name="name"
 							onChange={(e) => {
-								setState({event:{ ...state.event, name: e.target.value} });
+								setState({event:{ ...state?.event, name: e.target.value} });
 								return handleInputChange(e);
 							}}
 						/>
 	
 					</div>
-
 					<div className="form-group text-l">
 						<label
 							className="text-whitesmoke margin-r-xxxlg"
@@ -81,12 +76,12 @@ export const EventsDetail = () => {
 						<input
 							className="form-control form-in-signup"
 							type="text"
-							defaultValue={state.event.place}
+							defaultValue={state?.event?.place}
 							id="placeField"
 							name="place"
 							required={true}
 							onChange={(e)=>{
-								setState({event:{ ...state.event, place: e.target.value} });
+								setState({event:{ ...state?.event, place: e.target.value} });
 								handleInputChange(e);}}
 						/>
 					</div>
@@ -100,7 +95,7 @@ export const EventsDetail = () => {
 						</label>
 
 						<input
-							defaultValue={state.event.address}
+							defaultValue={state?.event?.address}
 							className="form-control form-in-signup"
 							type="text"
 							id="addressField"
@@ -108,7 +103,7 @@ export const EventsDetail = () => {
 							required={true}
 							autoComplete="address"
 							onChange={(e) => {
-								setState({event:{ ...state.event, address: e.target.value} });
+								setState({event:{ ...state?.event, address: e.target.value} });
 								return handleInputChange(e);
 							}}
 						/>
@@ -125,12 +120,12 @@ export const EventsDetail = () => {
 						<input
 							className="form-control form-in-signup"
 							type="text"
-							defaultValue={state.event.category}
+							defaultValue={state?.event?.category}
 							required={true}
 							id="eventCategory"
 							name="category"
 							onChange={(e) => {
-								setState({event:{ ...state.event, category: e.target.value} });
+								setState({event:{ ...state?.event, category: e.target.value} });
 								return handleInputChange(e);
 							}}
 						/>
@@ -142,17 +137,16 @@ export const EventsDetail = () => {
 							className="text-whitesmoke margin-r "
 							htmlFor="faceToFaceField"
 						>
-							Event is Online:
+							Event is face to face:
 						</label>
 						<input
 							className="form-control form-in-signup"
 							type="checkbox"
-							defaultChecked={state.event.is_face_to_face ?? false}
-							required={true}
+							defaultChecked={state?.event?.is_face_to_face}
 							id="faceToFaceField"
 							name="is_face_to_face"
 							onChange={(e) => {
-								setState({event:{ ...state.event, is_face_to_face: !e.target.checked} });
+								setState({event:{ ...state?.event, is_face_to_face: e.target.checked} });
 								return handleInputChange(e);
 							}}
 						/>
@@ -169,12 +163,12 @@ export const EventsDetail = () => {
 						<input
 							className="form-control form-in-signup"
 							type="text"
-							defaultValue={state.event.starts_at}
+							defaultValue={state?.event?.starts_at}
 							required={true}
 							id="startsAtField"
 							name="starts_at"
 							onChange={(e) => {
-								setState({event:{ ...state.event, starts_at: !e.target.value} });
+								setState({event:{ ...state?.event, starts_at: !e.target.value} });
 								return handleInputChange(e);
 							}}
 						/>
@@ -191,19 +185,17 @@ export const EventsDetail = () => {
 						<input
 							className="form-control form-in-signup"
 							type="text"
-							defaultValue={state.event.ends_at}
+							defaultValue={state?.event?.ends_at}
 							required={true}
 							id="endsAtField"
 							name="ends_at"
 							onChange={(e) => {
-								setState({event:{ ...state.event, ends_at: !e.target.value} });
+								setState({event:{ ...state?.event, ends_at: !e.target.value} });
 								return handleInputChange(e);
 							}}
 						/>
 						
 					</div>
-
-					DatePicker
 
 					<button	type="submit"className="form-button button-l margin-b"> Save modification </button>
 				</form>

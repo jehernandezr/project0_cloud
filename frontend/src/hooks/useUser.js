@@ -5,11 +5,13 @@ import registerService from '../services/register'
 import addEventService from '../services/addEvent'
 import delteEventService from '../services/delEvent'
 import editEventService from '../services/editEvent'
-
+import {parseJwt} from '../utils/jwt'
 import logoutService from '../services/logout'
 import Cookies from 'js-cookie'
+import { useHistory } from 'react-router-dom'
 export default function useUser () {
-  const {events, jwt, setevents, setJWT} = useContext(Context)
+  const {events, jwt, setEvents, setJWT} = useContext(Context)
+  const history = useHistory();
   const [state, setState] = useState({ loading: false, error: false })
   const [registerErr,setRegisterErr]=useState("")
   const login = useCallback((email, password) => {
@@ -43,13 +45,13 @@ export default function useUser () {
       })
   }, [setJWT])
 
-  const addEvent = useCallback( ({id}) => {
-    addEventService({id, jwt})
-    .then((events)=>  setevents(events))
+  const addEvent = useCallback( ({info}) => {
+    addEventService({info, jwt})
+    .then((events)=>  setEvents(events))
     .catch(e => {
-      alert(JSON.parse(e).message,'error')
+      console.log(e)
     });
-  }, [jwt, setevents]);
+  }, [jwt, setEvents]);
 
   const delEvent = useCallback(({id}) => {
     delteEventService({id, jwt})
@@ -57,24 +59,25 @@ export default function useUser () {
       if (message.includes("Succesfully")){
         let newevents = [...events]
         newevents =newevents.filter( el=>el._id!==id)
-        setevents(newevents);
+        setEvents(newevents);
         
       }
     } )
     .catch(e => {
-      alert(JSON.parse(e).message,'error')
+     console.log(e)
     })
-  }, [jwt, setevents,events]) 
+  }, [jwt, setEvents,events]) 
 
   const editEvent = useCallback(({id, info}) => {
     editEventService({id, info, jwt})
     .then( (res)=>
-      setevents([...events, res])
+    {setEvents([...events, res]);
+    history.push(`/events/${id}`);}
      )
     .catch(e => {
-      alert(JSON.parse(e).message,'error')
+      console.log(e)
     })
-  }, [jwt, setevents,events]);
+  }, [jwt, setEvents,events]);
 
   const logout = useCallback(() => {
     logoutService({jwt})
@@ -84,7 +87,7 @@ export default function useUser () {
 
     } )
     .catch(e => {
-      alert(JSON.parse(e).message,'error')
+      console.log(e)
     })
   }, [setJWT,jwt])
 
@@ -94,7 +97,7 @@ export default function useUser () {
     editEvent,
     events,
     jwt,
-    isLogged: Boolean(jwt),
+    isLogged: Boolean(parseJwt(jwt).exp * 1000 > new Date().getTime()),
     isLoginLoading: state.loading,
     hasLoginError: state.error,
     login,

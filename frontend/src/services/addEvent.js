@@ -1,6 +1,6 @@
 import {API} from '../constant/apiURI'
 
-export default function addEvent ({ id, jwt }) {
+export default function addEvent ({ info, jwt }) {
 
   return fetch(`${API}/events`, {
     method: 'POST',
@@ -8,7 +8,7 @@ export default function addEvent ({ id, jwt }) {
       "Authorization":"Bearer "+jwt,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({id: id})
+    body: JSON.stringify(info)
   }).then(res => {
     return res.json()
   }).then(res => {

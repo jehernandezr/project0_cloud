@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */
 import { useState,useEffect } from "react";
-import editEvent from "../services/editEvent";
 import useUser from './useUser'
 const emailRegex=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 let name, email, pass,passconf=false;
@@ -195,22 +194,44 @@ export const  useDetailEventForm= (schema) => {
   const [inputs, setInputs] = useState({});
   const {editEvent} =  useUser();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event,id) => {
     event.preventDefault();
-    console.log(event);
+
     const {category, name, starts_at, ends_at, place , is_face_to_face, address} = inputs;
 
-    editEvent({id:null, category, name, starts_at, ends_at, place , is_face_to_face, address})
-   
-
+    editEvent({id, info:{ category, name, starts_at, ends_at, place , is_face_to_face: Boolean(is_face_to_face), address}})
     
   };
 
   const handleInputChange = (event) => {
     if (event.target.type === 'checkbox' && event.target.name === 'is_face_to_face')
-        event.target.value = !event.target.checked
+        setInputs({...inputs, [event.target.name]: event.target.checked})
+    else
+        setInputs({ ...inputs, [event.target.name]: event.target.value });
+  };
 
-    setInputs({ ...inputs, [event.target.name]: event.target.value });
+  return { handleSubmit, handleInputChange };
+};
+
+
+export const  useDetailEventFormCreation= (schema) => {
+
+  const [inputs, setInputs] = useState({});
+  const {addEvent} =  useUser();
+
+  const handleSubmit = (event) => {
+
+    const {category, name, starts_at, ends_at, place , is_face_to_face, address} = inputs;
+
+    addEvent({ info:{ category, name, starts_at, ends_at, place , is_face_to_face: Boolean(is_face_to_face), address}})
+    
+  };
+
+  const handleInputChange = (event) => {
+    if (event.target.type === 'checkbox' && event.target.name === 'is_face_to_face')
+        setInputs({...inputs, [event.target.name]: event.target.checked})
+    else
+        setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
 
   return { handleSubmit, handleInputChange };

@@ -1,9 +1,8 @@
 import {API} from '../constant/apiURI'
 
 export default function editEvent ({ id, info, jwt }) {
-
-  return fetch(`${API}/events${id}`, {
-    method: 'POST',
+  return fetch(`${API}/events/${id}`, {
+    method: 'PUT',
     headers: {
       "Authorization":"Bearer "+jwt,
       "Content-Type": "application/json"
@@ -13,7 +12,7 @@ export default function editEvent ({ id, info, jwt }) {
     return res.json()
   }).then(res => {
     if(res.status==="fail") throw JSON.stringify(res)
-    const favs  = res
-    return favs
-  })
+    const event  = res
+    return event
+  }).catch(e => {console.log(e)})
 }

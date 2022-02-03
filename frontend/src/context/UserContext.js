@@ -11,14 +11,9 @@ export function UserContextProvider ({children}) {
   )
 
   useEffect(() => {
-     if (!jwt) return setEvents([])
-
       getEvents({jwt}).then(ev=>{
-      localStorage.setItem("events", JSON.stringify(events));
-      return setEvents(ev)
-    }).catch(
-      e=> alert(e)
-    )
+      setEvents(ev)
+    })
   }, [jwt])
   
 
