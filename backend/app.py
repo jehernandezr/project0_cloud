@@ -14,6 +14,7 @@ from error_handler import CustomError
 
 
 app = Flask(__name__)
+app = Flask(__name__, static_folder="frontend/build", static_url_path="/")
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{app_conf.postgres_user}:{app_conf.postgres_password}@{app_conf.postgres_host}:5432/{app_conf.postgres_db_name}"
@@ -37,6 +38,10 @@ def handle_invalid_usage(error):
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
+
+@app.route("/")
+def serve():
+    return app.send_static_file("index.html")
 
 api.add_resource(event_view.EventResourceList, '/api/v1/events')
 api.add_resource(event_view.EventResourceDetail, '/api/v1/events/<string:event_id>')
