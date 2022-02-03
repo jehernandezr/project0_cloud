@@ -97,7 +97,7 @@ export default function useUser () {
     editEvent,
     events,
     jwt,
-    isLogged: Boolean(parseJwt(jwt).exp * 1000 > new Date().getTime()),
+    isLogged: !!jwt && Boolean(parseJwt(jwt).exp * 1000 > new Date().getTime()),
     isLoginLoading: state.loading,
     hasLoginError: state.error,
     login,
