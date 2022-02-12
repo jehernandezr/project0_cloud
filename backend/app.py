@@ -38,8 +38,16 @@ def handle_invalid_usage(error):
     return response
 
 @app.route("/")
+@app.route("/events")
+@app.route("/login")
+@app.route("/signup")
 def serve():
     return app.send_static_file("index.html")
+
+@app.route("/events/<string:x>")
+def serve1(x):
+    return app.send_static_file("index.html")
+    
 
 api.add_resource(event_view.EventResourceList, '/api/v1/events')
 api.add_resource(event_view.EventResourceDetail, '/api/v1/events/<string:event_id>')

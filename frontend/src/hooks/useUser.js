@@ -71,7 +71,8 @@ export default function useUser () {
   const editEvent = useCallback(({id, info}) => {
     editEventService({id, info, jwt})
     .then( (res)=>
-    {setEvents([...events, res]);
+
+    {setEvents([...events.filter(event => event.id !== id), res]);
     history.push(`/events/${id}`);}
      )
     .catch(e => {

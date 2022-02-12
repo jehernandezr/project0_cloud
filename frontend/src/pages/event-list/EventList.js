@@ -23,7 +23,7 @@ export const EventList = (props) => {
 			</h1>
 			<br></br>
 			<div className="row justify-content-center visible">
-				{ events && events?.map((event) => (
+				{ events && events.length && events?.map((event) => (
 					<Link to={`/events/${event.id}`} key= {v4()}>
 						<EventCard key={event.id ?? v4() } event={event}></EventCard>
 					</Link>

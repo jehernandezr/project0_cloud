@@ -8,6 +8,9 @@ export const EventDetailCreation = () => {
 
   return (
     <div className="row justify-content-center visible">
+      <h1 className="row justify-content-center">
+				Events Creation
+			</h1>
       <form
         className="margin-t"
         onSubmit={(ev) => {
@@ -131,7 +134,7 @@ export const EventDetailCreation = () => {
             name="starts_at"
             onChange={(e) => {
               setState({
-                event: { ...state?.event, starts_at: !e.target.value },
+                event: { ...state?.event, starts_at: e.target.value },
               });
               return handleInputChange(e);
             }}
@@ -151,7 +154,7 @@ export const EventDetailCreation = () => {
             name="ends_at"
             onChange={(e) => {
               setState({
-                event: { ...state?.event, ends_at: !e.target.value },
+                event: { ...state?.event, ends_at: e.target.value },
               });
               return handleInputChange(e);
             }}
@@ -160,7 +163,7 @@ export const EventDetailCreation = () => {
 
         <button type="submit" className="form-button button-l margin-b">
           {" "}
-          Save modification{" "}
+          Save {" "}
         </button>
       </form>
     </div>
